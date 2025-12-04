@@ -6,14 +6,16 @@ import { WalletConnect } from '@/components/wallet';
 import { NetworkWarning } from '@/components/wallet/NetworkWarning';
 import { ConnectionStatus } from '@/components/ConnectionStatus';
 import { ConfessionFeed, CategoryFilter, CreateConfessionModal } from '@/components/confession';
+import { OnboardingModal } from '@/components/onboarding';
 import { useNetworkValidation } from '@/hooks/useNetworkValidation';
-import { useRealtimeConfessions, useRealtimeTips, useRealtimeConnection } from '@/hooks';
+import { useRealtimeConfessions, useRealtimeTips, useRealtimeConnection, useOnboarding } from '@/hooks';
 import type { ConfessionCategory } from '@/types';
 import styles from './page.module.css';
 
 function HomeContent() {
   const { address } = useAccount();
   const { isCorrectNetwork } = useNetworkValidation();
+  const { showOnboarding, completeOnboarding } = useOnboarding();
   const [selectedCategory, setSelectedCategory] = useState<ConfessionCategory | null>(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
@@ -110,6 +112,12 @@ function HomeContent() {
         onSuccess={() => {
           window.location.reload();
         }}
+      />
+
+      {/* Onboarding Modal */}
+      <OnboardingModal
+        isOpen={showOnboarding}
+        onComplete={completeOnboarding}
       />
     </div>
   );
