@@ -28,22 +28,22 @@ export const minikitConfig = {
   miniapp: {
     version: "1",
     name: "Confession Tip",
-    subtitle: "Confess anonymously, tip generously",
+    subtitle: "Anonymous tips on Base", // Max 30 chars
     description: "Share anonymous confessions and tip your favorites with USDC on Base. A fun, social app for sharing secrets safely.",
     screenshotUrls: [
       `${ROOT_URL}/screenshots/feed.png`,
       `${ROOT_URL}/screenshots/tip.png`,
       `${ROOT_URL}/screenshots/leaderboard.png`,
     ],
-    iconUrl: `${ROOT_URL}/logo-512.png`,
-    splashImageUrl: `${ROOT_URL}/logo-512.png`,
+    iconUrl: `${ROOT_URL}/logo-512.png`, // TODO: Replace with 1024x1024px PNG, no alpha
+    splashImageUrl: `${ROOT_URL}/splash.png`, // TODO: Replace with 200x200px
     splashBackgroundColor: "#0052ff",
     homeUrl: ROOT_URL,
     webhookUrl: `${ROOT_URL}/api/webhook`,
     primaryCategory: "social",
     tags: ["social", "tips", "anonymous", "confessions", "base"],
-    heroImageUrl: `${ROOT_URL}/banner.png`,
-    tagline: "Confess anonymously, tip generously",
+    heroImageUrl: `${ROOT_URL}/banner.png`, // 1200x630px
+    tagline: "Confess and tip on Base", // Max 30 chars
     ogTitle: "Confession Tip",
     ogDescription: "Share anonymous confessions and tip your favorites with USDC on Base.",
     ogImageUrl: `${ROOT_URL}/banner.png`,
