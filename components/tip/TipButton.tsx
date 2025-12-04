@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { Heart } from 'lucide-react';
 import {
   Transaction,
   TransactionButton,
@@ -10,7 +11,6 @@ import {
 } from '@coinbase/onchainkit/transaction';
 import type { LifecycleStatus } from '@coinbase/onchainkit/transaction';
 import { useAccount } from 'wagmi';
-import { Button } from '@/components/ui/Button';
 import { useToast } from '@/components/ui/Toast';
 import { base } from 'wagmi/chains';
 import { encodeFunctionData, parseUnits } from 'viem';
@@ -18,16 +18,22 @@ import styles from './TipButton.module.css';
 
 export interface TipButtonProps {
   confessionId: string;
-  recipientAddress: string; // Confession author's wallet address
+  recipientAddress: string;
   onTipSuccess?: () => void;
   disabled?: boolean;
   className?: string;
+  hasTipped?: boolean;
 }
 
 const USDC_ADDRESS = process.env.NEXT_PUBLIC_USDC_ADDRESS as `0x${string}`;
-const TIP_AMOUNTS = [0.001, 0.005, 0.01, 0.05];
+const TIP_AMOUNTS = [
+  { value: 0.05, label: '$0.05' },
+  { value: 0.10, label: '$0.10' },
+  { value: 0.50, label: '$0.50' },
+  { value: 1.00, label: '$1.00' },
+  { value: 5.00, label: '$5.00' },
+];
 
-// USDC ERC20 ABI (transfer function)
 const USDC_ABI = [
   {
     constant: false,
@@ -47,6 +53,7 @@ export const TipButton: React.FC<TipButtonProps> = ({
   onTipSuccess,
   disabled = false,
   className = '',
+  hasTipped = false,
 }) => {
   const [showAmountSelector, setShowAmountSelector] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
@@ -64,16 +71,15 @@ export const TipButton: React.FC<TipButtonProps> = ({
       setIsProcessing(false);
       showToast('Tip sent successfully! 🎉', 'success');
       
-      // Record tip in database
-      if (status.statusData.transactionReceipts?.[0]?.transactionHash) {
+      if (status.statusData.transactionReceipts?.[0]?.transactionHash && address) {
         try {
           await fetch('/api/tips', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              confessionId,
-              amount: selectedAmount,
-              txHash: status.statusData.transactionReceipts[0].transactionHash,
+              confession_id: confessionId,
+              tipper_address: address,
+              transaction_hash: status.statusData.transactionReceipts[0].transactionHash,
             }),
           });
           
@@ -100,11 +106,10 @@ export const TipButton: React.FC<TipButtonProps> = ({
     showToast(error?.message || 'Transaction failed', 'error');
   };
 
-  // Generate transaction calls
   const getCalls = () => {
     if (!selectedAmount || !address || !recipientAddress) return [];
 
-    const amountInUsdc = parseUnits(selectedAmount.toString(), 6); // USDC has 6 decimals
+    const amountInUsdc = parseUnits(selectedAmount.toString(), 6);
 
     return [
       {
@@ -120,37 +125,43 @@ export const TipButton: React.FC<TipButtonProps> = ({
 
   if (!address) {
     return (
-      <Button variant="primary" size="sm" disabled className={className}>
-        Connect Wallet to Tip
-      </Button>
+      <button className={`${styles.tipBtn} ${styles.disabled} ${className}`} disabled>
+        <Heart className={styles.heartIcon} />
+        Tip
+      </button>
     );
   }
 
   if (!selectedAmount) {
     return (
       <div className={`${styles.container} ${className}`}>
-        <Button
-          variant="primary"
-          size="sm"
+        <button
+          className={`${styles.tipBtn} ${hasTipped ? styles.tipped : ''}`}
           onClick={() => setShowAmountSelector(!showAmountSelector)}
           disabled={disabled || isProcessing}
         >
-          💸 Tip
-        </Button>
+          <Heart className={`${styles.heartIcon} ${hasTipped ? styles.filled : ''}`} />
+          Tip
+        </button>
 
         {showAmountSelector && (
-          <div className={styles.amountSelector}>
-            <div className={styles.selectorHeader}>Select Amount</div>
-            {TIP_AMOUNTS.map((amount) => (
-              <button
-                key={amount}
-                className={styles.amountOption}
-                onClick={() => handleAmountSelect(amount)}
-              >
-                ${amount} USDC
-              </button>
-            ))}
-          </div>
+          <>
+            <div className={styles.overlay} onClick={() => setShowAmountSelector(false)} />
+            <div className={styles.dropdown}>
+              <div className={styles.dropdownHeader}>Tip Amount</div>
+              <div className={styles.dropdownGrid}>
+                {TIP_AMOUNTS.map((amount) => (
+                  <button
+                    key={amount.value}
+                    className={styles.dropdownItem}
+                    onClick={() => handleAmountSelect(amount.value)}
+                  >
+                    {amount.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
         )}
       </div>
     );
@@ -165,8 +176,8 @@ export const TipButton: React.FC<TipButtonProps> = ({
         onError={handleError}
       >
         <TransactionButton
-          className={styles.transactionButton}
-          text={`Tip $${selectedAmount} USDC`}
+          className={styles.txBtn}
+          text={`Tip ${selectedAmount} USDC`}
           disabled={disabled || isProcessing}
         />
         <TransactionStatus>
@@ -176,7 +187,7 @@ export const TipButton: React.FC<TipButtonProps> = ({
       </Transaction>
 
       <button
-        className={styles.cancelButton}
+        className={styles.cancelBtn}
         onClick={() => setSelectedAmount(null)}
         disabled={isProcessing}
       >

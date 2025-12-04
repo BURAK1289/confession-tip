@@ -17,7 +17,7 @@ export const minikitConfig = {
   },
   baseBuilder: {
     // Wallet address for Base Builder Rewards program
-    allowedAddresses: ["0x16ad3a6F473Ba57Cd944d461E48a327802b63bFa"],
+    ownerAddress: "0xf30Dd3a945a12aaEAE3f355Ba0212d6256e6c8d9",
   },
   miniapp: {
     version: "1",

@@ -9,3 +9,5 @@ export type { CategoryFilterProps } from './CategoryFilter';
 
 export { CreateConfessionModal } from './CreateConfessionModal';
 export type { CreateConfessionModalProps } from './CreateConfessionModal';
+
+export * from './CategoryIcons';

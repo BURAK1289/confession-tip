@@ -1,12 +1,13 @@
 'use client';
 
+import { useCallback } from 'react';
 import { useToast } from '@/components/ui/Toast';
 import { trackShare } from '@/lib/analytics';
 import { useSafeMiniKit } from './useSafeMiniKit';
 import type { Confession } from '@/types';
 
 export const useFarcasterShare = () => {
-  const { context, isInMiniApp } = useSafeMiniKit();
+  const { isInMiniApp } = useSafeMiniKit();
   const { showToast } = useToast();
 
   const truncateText = (text: string, maxLength: number = 280): string => {
@@ -15,55 +16,96 @@ export const useFarcasterShare = () => {
   };
 
   const generateShareUrl = (confessionId: string): string => {
-    const baseUrl = process.env.NEXT_PUBLIC_URL || (typeof window !== 'undefined' ? window.location.origin : '');
-    return `${baseUrl}?confession=${confessionId}`;
+    const baseUrl =
+      process.env.NEXT_PUBLIC_URL ||
+      (typeof window !== 'undefined' ? window.location.origin : '');
+    return `${baseUrl}/confession/${confessionId}`;
   };
 
-  const shareConfession = async (confession: Confession) => {
-    try {
-      // Truncate confession text to 280 characters for Farcaster
-      const truncatedText = truncateText(confession.text, 280);
-      const shareUrl = generateShareUrl(confession.id);
+  const shareConfession = useCallback(
+    async (confession: Confession) => {
+      try {
+        const truncatedText = truncateText(confession.text, 200);
+        const shareUrl = generateShareUrl(confession.id);
 
-      // Build share text
-      const shareText = `${truncatedText}\n\n🤫 Share your confession anonymously on Confession Tip!\n${shareUrl}`;
+        // Build share text
+        const shareText = `🤫 Anonymous Confession:\n\n"${truncatedText}"\n\nTip this confession on Confession Tip!`;
 
-      // Track share event
-      trackShare({
-        confessionId: confession.id,
-        category: confession.category,
-        timestamp: new Date().toISOString(),
-      });
+        // Track share event
+        trackShare({
+          confessionId: confession.id,
+          category: confession.category,
+          timestamp: new Date().toISOString(),
+        });
 
-      // Check if MiniKit is available (running in Farcaster)
-      if (isInMiniApp && context?.client) {
-        // Use MiniKit SDK to open Farcaster compose dialog
-        showToast('Opening Farcaster...', 'info');
-        
-        // For now, copy to clipboard as fallback
-        await navigator.clipboard.writeText(shareText);
-        showToast('Share text copied! Paste in Farcaster.', 'success');
-      } else {
-        // Fallback: Copy to clipboard (local development or non-Farcaster browser)
-        await navigator.clipboard.writeText(shareText);
-        showToast('Share text copied to clipboard!', 'success');
+        // Try Farcaster SDK first (if in MiniApp)
+        if (isInMiniApp) {
+          try {
+            const { sdk } = await import('@farcaster/miniapp-sdk');
+
+            // Use composeCast to open Farcaster compose dialog
+            await sdk.actions.composeCast({
+              text: shareText,
+              embeds: [shareUrl],
+            });
+
+            showToast('Cast composed!', 'success');
+            return { success: true };
+          } catch (sdkError) {
+            console.warn('Farcaster SDK composeCast failed:', sdkError);
+            // Fall through to other methods
+          }
+        }
+
+        // Try Web Share API (mobile browsers)
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: 'Anonymous Confession',
+              text: shareText,
+              url: shareUrl,
+            });
+            showToast('Shared successfully!', 'success');
+            return { success: true };
+          } catch (shareError) {
+            // User cancelled or share failed
+            if ((shareError as Error).name !== 'AbortError') {
+              console.warn('Web Share API failed:', shareError);
+            }
+          }
+        }
+
+        // Fallback: Open Warpcast intent URL
+        const warpcastUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=${encodeURIComponent(shareUrl)}`;
+
+        // Try to open in new tab
+        const newWindow = window.open(warpcastUrl, '_blank', 'noopener,noreferrer');
+
+        if (newWindow) {
+          showToast('Opening Warpcast...', 'info');
+        } else {
+          // If popup blocked, copy to clipboard
+          await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+          showToast('Share text copied! Open Warpcast to post.', 'success');
+        }
+
+        return { success: true };
+      } catch (error) {
+        console.error('Share failed:', error);
+        showToast('Failed to share confession', 'error');
+        return { success: false, error };
       }
-
-      return { success: true };
-    } catch (error) {
-      console.error('Share failed:', error);
-      showToast('Failed to share confession', 'error');
-      return { success: false, error };
-    }
-  };
+    },
+    [isInMiniApp, showToast]
+  );
 
   const generateOpenGraphMetadata = (confession: Confession) => {
     const truncatedText = truncateText(confession.text, 200);
-    
+
     return {
       title: `Anonymous Confession - ${confession.category}`,
       description: truncatedText,
-      image: `${process.env.NEXT_PUBLIC_URL || ''}/og-image.png`,
+      image: `${process.env.NEXT_PUBLIC_URL || ''}/api/og?id=${confession.id}`,
       url: generateShareUrl(confession.id),
     };
   };

@@ -134,9 +134,9 @@ export async function POST(request: NextRequest) {
     // Convert USDC amount (6 decimals) to decimal
     const tipAmount = Number(value) / 1_000_000;
 
-    // Validate tip amount is reasonable (between 0.001 and 1 USDC)
-    if (tipAmount < 0.001 || tipAmount > 1) {
-      throw new ValidationError("Tip amount must be between 0.001 and 1 USDC");
+    // Validate tip amount is reasonable (between 0.01 and 10 USDC)
+    if (tipAmount < 0.01 || tipAmount > 10) {
+      throw new ValidationError("Tip amount must be between 0.01 and 10 USDC");
     }
 
     // Ensure users exist in database

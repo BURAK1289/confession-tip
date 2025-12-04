@@ -57,6 +57,11 @@ function HomeContent() {
       </header>
 
       <main className={styles.main}>
+        <div className={styles.heroSection}>
+          <h2 className={styles.heroTitle}>Anonymous Confessions</h2>
+          <p className={styles.heroSubtitle}>Share your secrets safely</p>
+        </div>
+
         <div className={styles.filterSection}>
           <CategoryFilter
             selected={selectedCategory}
