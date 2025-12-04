@@ -1,0 +1,392 @@
+/* Container */
+.container {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding-bottom: 2rem;
+}
+
+/* Header */
+.header {
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1.5rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.backButton {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.5rem 1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.backButton:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+/* Content */
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.connectWallet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.walletButton {
+  display: flex;
+  justify-content: center;
+}
+
+/* Address Card */
+.addressCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+}
+
+.addressLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.address {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 1rem;
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease-in-out;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.statIcon {
+  font-size: 2rem;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.statLabel {
+  font-size: 0.8125rem;
+  color: #64748b;
+  text-align: center;
+}
+
+.statSkeleton {
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 0.5rem;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Referral Section */
+.referralSection {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-radius: 0.75rem;
+  border: 1px solid #93c5fd;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+}
+
+.referralDescription {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.referralCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+.referralCode {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.referralLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.code {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #3b82f6;
+}
+
+/* Confessions Section */
+.confessionsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.confessionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.confessionItem {
+  padding: 1rem;
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease-in-out;
+}
+
+.confessionItem:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.confessionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.confessionDate {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.confessionText {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #1e293b;
+  margin: 0 0 0.75rem 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.confessionStats {
+  display: flex;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.confessionStat {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.confessionStatIcon {
+  font-size: 1rem;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: #0f172a;
+  }
+
+  .header {
+    background: #1e293b;
+    border-bottom-color: #334155;
+  }
+
+  .backButton {
+    background: #334155;
+    border-color: #475569;
+    color: #94a3b8;
+  }
+
+  .backButton:hover {
+    background: #475569;
+    border-color: #64748b;
+  }
+
+  .title {
+    background: linear-gradient(135deg, #a78bfa 0%, #818cf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .addressCard,
+  .statCard,
+  .confessionItem {
+    background: #1e293b;
+    border-color: #334155;
+  }
+
+  .address,
+  .statValue,
+  .confessionText {
+    color: #e2e8f0;
+  }
+
+  .addressLabel,
+  .statLabel,
+  .confessionDate,
+  .confessionStat {
+    color: #94a3b8;
+  }
+
+  .referralSection {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    border-color: #3b82f6;
+  }
+
+  .sectionTitle {
+    color: #e2e8f0;
+  }
+
+  .referralDescription {
+    color: #93c5fd;
+  }
+
+  .referralCard {
+    background: #1e293b;
+    border-color: #334155;
+  }
+
+  .code {
+    color: #60a5fa;
+  }
+
+  .confessionStats {
+    border-top-color: #334155;
+  }
+
+  .statSkeleton {
+    background: linear-gradient(90deg, #2d3748 0%, #1a202c 50%, #2d3748 100%);
+    background-size: 200% 100%;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .header {
+    padding: 1rem;
+  }
+
+  .backButton {
+    left: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .content {
+    padding: 1rem 0.75rem;
+    gap: 1rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .referralCard {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .referralCard button {
+    width: 100%;
+  }
+}

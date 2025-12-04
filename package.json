@@ -1,0 +1,52 @@
+{
+  "name": "my-minikit-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:db": "tsx scripts/test-db-connection.ts",
+    "test:utils": "tsx scripts/test-utils.ts",
+    "db:migrate": "tsx scripts/run-migrations.ts",
+    "deploy:check": "npm run lint && npm run build && npm run test",
+    "deploy:validate": "tsx scripts/validate-deployment.ts"
+  },
+  "dependencies": {
+    "@coinbase/onchainkit": "latest",
+    "@farcaster/miniapp-sdk": "^0.1.8",
+    "@sentry/nextjs": "^8.55.0",
+    "@supabase/supabase-js": "^2.86.0",
+    "@tailwindcss/postcss": "^4.1.17",
+    "@tanstack/react-query": "^5.81.5",
+    "dotenv": "^17.2.3",
+    "next": "15.3.4",
+    "openai": "^6.9.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsx": "^4.21.0",
+    "viem": "^2.31.6",
+    "wagmi": "^2.16.3"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@farcaster/quick-auth": "^0.0.7",
+    "@next/eslint-plugin-next": "^15.3.4",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitest/ui": "^4.0.15",
+    "autoprefixer": "^10.4.22",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.4",
+    "fast-check": "^4.3.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5",
+    "vitest": "^4.0.15"
+  }
+}

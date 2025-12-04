@@ -1,0 +1,84 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  color: var(--text-secondary, #666666);
+}
+
+.toggleGroup {
+  display: flex;
+  background: var(--toggle-background, #f0f0f0);
+  border-radius: 8px;
+  padding: 2px;
+}
+
+.option {
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.option:hover {
+  background: var(--toggle-hover, #e0e0e0);
+}
+
+.option.active {
+  background: var(--toggle-active, #ffffff);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.toggleButton {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--toggle-background, #f0f0f0);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.toggleButton:hover {
+  background: var(--toggle-hover, #e0e0e0);
+  transform: scale(1.05);
+}
+
+.toggleButton:active {
+  transform: scale(0.95);
+}
+
+/* Dark mode */
+:global(.dark) .label {
+  color: var(--text-secondary-dark, #aaaaaa);
+}
+
+:global(.dark) .toggleGroup {
+  background: var(--toggle-background-dark, #2a2a2a);
+}
+
+:global(.dark) .option:hover {
+  background: var(--toggle-hover-dark, #3a3a3a);
+}
+
+:global(.dark) .option.active {
+  background: var(--toggle-active-dark, #4a4a4a);
+}
+
+:global(.dark) .toggleButton {
+  background: var(--toggle-background-dark, #2a2a2a);
+}
+
+:global(.dark) .toggleButton:hover {
+  background: var(--toggle-hover-dark, #3a3a3a);
+}

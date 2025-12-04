@@ -1,0 +1,91 @@
+.statusBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.icon {
+  font-size: 16px;
+}
+
+.text {
+  color: inherit;
+}
+
+.subtext {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.offline {
+  background-color: #ef4444;
+  color: white;
+}
+
+.reconnecting {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.disconnected {
+  background-color: #6b7280;
+  color: white;
+}
+
+.connected {
+  background-color: #10b981;
+  color: white;
+}
+
+.reconnectButton {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.reconnectButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .offline {
+    background-color: #dc2626;
+  }
+
+  .reconnecting {
+    background-color: #d97706;
+  }
+
+  .disconnected {
+    background-color: #4b5563;
+  }
+
+  .connected {
+    background-color: #059669;
+  }
+}

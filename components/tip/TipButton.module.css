@@ -1,0 +1,139 @@
+/* Container */
+.container {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Amount Selector */
+.amountSelector {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 0.5rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 140px;
+  z-index: 10;
+  animation: slideUp 0.2s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.selectorHeader {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  padding: 0.25rem 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.amountOption {
+  padding: 0.625rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-align: left;
+}
+
+.amountOption:hover {
+  background: #f8fafc;
+  color: #3b82f6;
+}
+
+.amountOption:active {
+  background: #f1f5f9;
+}
+
+/* Transaction Button */
+.transactionButton {
+  min-width: 120px;
+}
+
+/* Cancel Button */
+.cancelButton {
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.cancelButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .amountSelector {
+    background: #1e293b;
+    border-color: #334155;
+  }
+
+  .selectorHeader {
+    color: #94a3b8;
+  }
+
+  .amountOption {
+    color: #e2e8f0;
+  }
+
+  .amountOption:hover {
+    background: #334155;
+    color: #60a5fa;
+  }
+
+  .amountOption:active {
+    background: #475569;
+  }
+
+  .cancelButton {
+    color: #94a3b8;
+    border-color: #334155;
+  }
+
+  .cancelButton:hover:not(:disabled) {
+    background: #334155;
+    border-color: #475569;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .amountSelector {
+    right: auto;
+    left: 0;
+  }
+}

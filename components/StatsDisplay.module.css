@@ -1,0 +1,136 @@
+.container {
+  background: var(--card-background, #ffffff);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  background: var(--stat-background, #f5f5f5);
+  border-radius: 8px;
+}
+
+.statIcon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--text-secondary, #666666);
+  text-align: center;
+}
+
+.todaySection {
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+}
+
+.todayTitle {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.todayStats {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary, #666666);
+}
+
+.lastUpdated {
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--text-tertiary, #999999);
+  text-align: right;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-secondary, #666666);
+}
+
+/* Compact variant */
+.compactContainer {
+  display: flex;
+  gap: 16px;
+  padding: 8px 16px;
+  background: var(--stat-background, #f5f5f5);
+  border-radius: 8px;
+  font-size: 13px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.compactStat {
+  color: var(--text-secondary, #666666);
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: var(--card-background-dark, #1a1a1a);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .title,
+  .statValue,
+  .todayTitle {
+    color: var(--text-primary-dark, #ffffff);
+  }
+
+  .statCard {
+    background: var(--stat-background-dark, #2a2a2a);
+  }
+
+  .statLabel,
+  .todayStats {
+    color: var(--text-secondary-dark, #aaaaaa);
+  }
+
+  .lastUpdated {
+    color: var(--text-tertiary-dark, #777777);
+  }
+
+  .compactContainer {
+    background: var(--stat-background-dark, #2a2a2a);
+  }
+
+  .compactStat {
+    color: var(--text-secondary-dark, #aaaaaa);
+  }
+}
+
+/* Responsive */
+@media (min-width: 480px) {
+  .statsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

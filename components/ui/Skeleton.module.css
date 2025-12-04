@@ -1,0 +1,101 @@
+/* Base skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 0%,
+    #e0e0e0 50%,
+    #f0f0f0 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 0.25rem;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Variants */
+.text {
+  height: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.circular {
+  border-radius: 50%;
+}
+
+.rectangular {
+  border-radius: 0.375rem;
+}
+
+/* Card Skeleton */
+.cardSkeleton {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.cardSkeleton .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.cardSkeleton .content {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cardSkeleton .footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.cardSkeleton .stats {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      #2d3748 0%,
+      #1a202c 50%,
+      #2d3748 100%
+    );
+    background-size: 200% 100%;
+  }
+
+  .cardSkeleton {
+    background: #1e293b;
+    border-color: #334155;
+  }
+
+  .cardSkeleton .footer {
+    border-top-color: #334155;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .cardSkeleton {
+    padding: 1rem;
+  }
+}

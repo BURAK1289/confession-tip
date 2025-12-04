@@ -1,0 +1,42 @@
+.container {
+  min-height: 100vh;
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.content {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.error {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.error h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-primary);
+}
+
+.error p {
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
