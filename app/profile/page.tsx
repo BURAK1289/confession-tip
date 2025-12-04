@@ -10,7 +10,6 @@ import { WalletConnect } from '@/components/wallet';
 import { useToast } from '@/components/ui/Toast';
 import { useRealtimeUserTips } from '@/hooks';
 import type { Confession } from '@/types';
-import Link from 'next/link';
 import styles from './page.module.css';
 
 interface UserProfile {
@@ -30,7 +29,18 @@ const fetchProfile = async (address: string): Promise<UserProfile> => {
     throw new Error('Failed to fetch profile');
   }
 
-  return response.json();
+  const data = await response.json();
+  
+  // Transform API response to match frontend interface
+  return {
+    address: data.user?.address || address,
+    totalConfessions: data.user?.total_confessions || 0,
+    totalTipsReceived: data.user?.total_tips_received || 0,
+    totalTipsGiven: data.user?.total_tips_given || 0,
+    referralCode: data.user?.referral_code || '',
+    referralCount: data.user?.referral_count || 0,
+    confessions: data.confessions || [],
+  };
 };
 
 export default function ProfilePage() {
@@ -68,9 +78,6 @@ export default function ProfilePage() {
     return (
       <div className={styles.container}>
         <header className={styles.header}>
-          <Link href="/" className={styles.backButton}>
-            ← Back
-          </Link>
           <h1 className={styles.title}>👤 Profile</h1>
         </header>
         <div className={styles.content}>
@@ -93,9 +100,6 @@ export default function ProfilePage() {
     return (
       <div className={styles.container}>
         <header className={styles.header}>
-          <Link href="/" className={styles.backButton}>
-            ← Back
-          </Link>
           <h1 className={styles.title}>👤 Profile</h1>
         </header>
         <div className={styles.content}>
@@ -115,9 +119,6 @@ export default function ProfilePage() {
     return (
       <div className={styles.container}>
         <header className={styles.header}>
-          <Link href="/" className={styles.backButton}>
-            ← Back
-          </Link>
           <h1 className={styles.title}>👤 Profile</h1>
         </header>
         <div className={styles.content}>
@@ -134,9 +135,6 @@ export default function ProfilePage() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <Link href="/" className={styles.backButton}>
-          ← Back
-        </Link>
         <h1 className={styles.title}>👤 Profile</h1>
       </header>
 
