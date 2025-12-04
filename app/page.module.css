@@ -48,6 +48,13 @@
   background-clip: text;
 }
 
+/* Header Right */
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* Main Content */
 .main {
   flex: 1;

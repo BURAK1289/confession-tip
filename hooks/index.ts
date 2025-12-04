@@ -7,3 +7,5 @@ export { useNetworkStatus, useOfflineQueue } from './useNetworkStatus';
 export { useSafeMiniKit } from './useSafeMiniKit';
 export { useFarcasterShare } from './useFarcasterShare';
 export { useOnboarding } from './useOnboarding';
+export { useFarcasterProfile, useCurrentUserProfile, formatAddress } from './useFarcasterProfile';
+export type { FarcasterProfile } from './useFarcasterProfile';

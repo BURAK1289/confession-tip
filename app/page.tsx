@@ -7,8 +7,9 @@ import { NetworkWarning } from '@/components/wallet/NetworkWarning';
 import { ConnectionStatus } from '@/components/ConnectionStatus';
 import { ConfessionFeed, CategoryFilter, CreateConfessionModal } from '@/components/confession';
 import { OnboardingModal } from '@/components/onboarding';
+import { UserProfile } from '@/components/user';
 import { useNetworkValidation } from '@/hooks/useNetworkValidation';
-import { useRealtimeConfessions, useRealtimeTips, useRealtimeConnection, useOnboarding } from '@/hooks';
+import { useRealtimeConfessions, useRealtimeTips, useRealtimeConnection, useOnboarding, useCurrentUserProfile } from '@/hooks';
 import type { ConfessionCategory } from '@/types';
 import styles from './page.module.css';
 
@@ -16,6 +17,7 @@ function HomeContent() {
   const { address } = useAccount();
   const { isCorrectNetwork } = useNetworkValidation();
   const { showOnboarding, completeOnboarding } = useOnboarding();
+  const { profile: currentUserProfile } = useCurrentUserProfile();
   const [selectedCategory, setSelectedCategory] = useState<ConfessionCategory | null>(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
@@ -54,7 +56,18 @@ function HomeContent() {
             <span className={styles.logoIcon}>🤫</span>
             <h1 className={styles.logoText}>Confession Tip</h1>
           </div>
-          <WalletConnect />
+          <div className={styles.headerRight}>
+            {address && (
+              <UserProfile
+                address={address}
+                profile={currentUserProfile || undefined}
+                size="sm"
+                showUsername={true}
+                showAvatar={true}
+              />
+            )}
+            <WalletConnect />
+          </div>
         </div>
       </header>
 

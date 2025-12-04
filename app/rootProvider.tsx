@@ -4,6 +4,7 @@ import { base } from "wagmi/chains";
 import { OnchainKitProvider } from "@coinbase/onchainkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastProvider } from "@/components/ui/Toast";
+import { BottomNavigation } from "@/components/navigation";
 import "@coinbase/onchainkit/styles.css";
 
 export function RootProvider({ children }: { children: ReactNode }) {
@@ -51,7 +52,10 @@ export function RootProvider({ children }: { children: ReactNode }) {
           notificationProxyUrl: undefined,
         }}
       >
-        <ToastProvider>{children}</ToastProvider>
+        <ToastProvider>
+          {children}
+          <BottomNavigation />
+        </ToastProvider>
       </OnchainKitProvider>
     </QueryClientProvider>
   );

@@ -1,0 +1,123 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Avatar */
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.avatarSm {
+  width: 24px;
+  height: 24px;
+}
+
+.avatarMd {
+  width: 32px;
+  height: 32px;
+}
+
+.avatarLg {
+  width: 40px;
+  height: 40px;
+}
+
+/* Fallback avatar */
+.avatarFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: #fff;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.avatarFallbackSm {
+  width: 24px;
+  height: 24px;
+  font-size: 0.625rem;
+}
+
+.avatarFallbackMd {
+  width: 32px;
+  height: 32px;
+  font-size: 0.75rem;
+}
+
+.avatarFallbackLg {
+  width: 40px;
+  height: 40px;
+  font-size: 0.875rem;
+}
+
+/* Info */
+.info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.username {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.usernameSm {
+  font-size: 0.75rem;
+}
+
+.usernameMd {
+  font-size: 0.875rem;
+}
+
+.usernameLg {
+  font-size: 1rem;
+}
+
+.address {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: monospace;
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeletonAvatar {
+  border-radius: 50%;
+}
+
+.skeletonText {
+  height: 14px;
+  width: 80px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

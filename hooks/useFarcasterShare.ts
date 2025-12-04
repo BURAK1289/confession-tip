@@ -49,7 +49,7 @@ export const useFarcasterShare = () => {
               embeds: [shareUrl],
             });
 
-            showToast('Cast composed!', 'success');
+            showToast('Shared!', 'success');
             return { success: true };
           } catch (sdkError) {
             console.warn('Farcaster SDK composeCast failed:', sdkError);
@@ -75,19 +75,9 @@ export const useFarcasterShare = () => {
           }
         }
 
-        // Fallback: Open Warpcast intent URL
-        const warpcastUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=${encodeURIComponent(shareUrl)}`;
-
-        // Try to open in new tab
-        const newWindow = window.open(warpcastUrl, '_blank', 'noopener,noreferrer');
-
-        if (newWindow) {
-          showToast('Opening Warpcast...', 'info');
-        } else {
-          // If popup blocked, copy to clipboard
-          await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
-          showToast('Share text copied! Open Warpcast to post.', 'success');
-        }
+        // Fallback: Copy to clipboard
+        await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+        showToast('Share text copied!', 'success');
 
         return { success: true };
       } catch (error) {
