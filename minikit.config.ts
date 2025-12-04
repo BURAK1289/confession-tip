@@ -28,8 +28,8 @@ export const minikitConfig = {
   miniapp: {
     version: "1",
     name: "Confession Tip",
-    subtitle: "Share secrets, earn tips",
-    description: "Anonymous confessions with USDC tipping on Base. Share your secrets and support others.",
+    subtitle: "Confess anonymously, tip generously",
+    description: "Share anonymous confessions and tip your favorites with USDC on Base. A fun, social app for sharing secrets safely.",
     screenshotUrls: [
       `${ROOT_URL}/screenshots/feed.png`,
       `${ROOT_URL}/screenshots/tip.png`,
@@ -43,7 +43,7 @@ export const minikitConfig = {
     primaryCategory: "social",
     tags: ["social", "tips", "anonymous", "confessions", "base"],
     heroImageUrl: `${ROOT_URL}/hero.png`,
-    tagline: "Confess. Tip. Connect.",
+    tagline: "Confess anonymously, tip generously",
     ogTitle: "Confession Tip",
     ogDescription: "Share anonymous confessions and tip your favorites with USDC on Base.",
     ogImageUrl: `${ROOT_URL}/hero.png`,
