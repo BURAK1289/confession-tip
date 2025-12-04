@@ -9,8 +9,18 @@ const ROOT_URL =
  * @see {@link https://docs.base.org/mini-apps/features/manifest}
  */
 export const minikitConfig = {
-  // accountAssociation will be added after running: npx create-onchain --manifest
-  // This requires connecting your Farcaster custody wallet
+  // accountAssociation is required for Farcaster verification
+  // Generate these by running: npx create-onchain --manifest
+  // Or manually sign your domain with your Farcaster custody wallet
+  ...(process.env.FARCASTER_HEADER &&
+    process.env.FARCASTER_PAYLOAD &&
+    process.env.FARCASTER_SIGNATURE && {
+      accountAssociation: {
+        header: process.env.FARCASTER_HEADER,
+        payload: process.env.FARCASTER_PAYLOAD,
+        signature: process.env.FARCASTER_SIGNATURE,
+      },
+    }),
   baseBuilder: {
     // Wallet address for Base Builder Rewards program
     ownerAddress: "0xf30Dd3a945a12aaEAE3f355Ba0212d6256e6c8d9",
@@ -39,4 +49,4 @@ export const minikitConfig = {
     ogImageUrl: `${ROOT_URL}/hero.png`,
     noindex: process.env.NODE_ENV !== "production",
   },
-} as const;
+};
