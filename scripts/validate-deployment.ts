@@ -82,10 +82,10 @@ async function checkMinikitConfig() {
     );
 
     check(
-      "Base Builder Owner Address",
-      !!minikitConfig.baseBuilder?.ownerAddress,
-      `Owner: ${minikitConfig.baseBuilder?.ownerAddress?.slice(0, 10)}...`,
-      "Owner address not set - required for Base rewards",
+      "Base Builder Allowed Addresses",
+      !!(minikitConfig.baseBuilder?.allowedAddresses?.length),
+      `Addresses: ${minikitConfig.baseBuilder?.allowedAddresses?.[0]?.slice(0, 10)}...`,
+      "Allowed addresses not set - required for Base rewards",
       true
     );
 

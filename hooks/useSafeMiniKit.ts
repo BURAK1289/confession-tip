@@ -28,13 +28,13 @@ export function useSafeMiniKit(): SafeMiniKitResult {
         // The miniapp-sdk provides context when running inside Farcaster
         const { sdk } = await import('@farcaster/miniapp-sdk');
         
-        // Check if SDK is available and we're in miniapp context
-        if (sdk && typeof sdk.isReady === 'function') {
-          const ready = await sdk.isReady();
-          if (ready) {
-            setIsInMiniApp(true);
-            setContext({ client: sdk });
-          }
+        // Get context - returns null if not in miniapp
+        const miniAppContext = await sdk.context;
+        
+        // Check if we got a valid context (running inside Farcaster)
+        if (miniAppContext && miniAppContext.user) {
+          setIsInMiniApp(true);
+          setContext({ client: sdk });
         }
       } catch {
         // Not in miniapp context - this is fine for local development

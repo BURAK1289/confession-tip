@@ -16,8 +16,8 @@ export const minikitConfig = {
     signature: "",
   },
   baseBuilder: {
-    // Set this to your wallet address for Base reward program
-    ownerAddress: "",
+    // Wallet address for Base Builder Rewards program
+    allowedAddresses: ["0x16ad3a6F473Ba57Cd944d461E48a327802b63bFa"],
   },
   miniapp: {
     version: "1",
