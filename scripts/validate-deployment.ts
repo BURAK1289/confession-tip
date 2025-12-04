@@ -57,27 +57,13 @@ async function checkMinikitConfig() {
       "Category not set to 'social'"
     );
 
+    // Check if accountAssociation exists (optional until manifest is generated)
+    const hasAccountAssociation = 'accountAssociation' in minikitConfig;
     check(
-      "Account Association Header",
-      !!minikitConfig.accountAssociation?.header,
-      "Header set",
-      "Header not set - generate at https://base.org/build",
-      true
-    );
-
-    check(
-      "Account Association Payload",
-      !!minikitConfig.accountAssociation?.payload,
-      "Payload set",
-      "Payload not set - generate at https://base.org/build",
-      true
-    );
-
-    check(
-      "Account Association Signature",
-      !!minikitConfig.accountAssociation?.signature,
-      "Signature set",
-      "Signature not set - generate at https://base.org/build",
+      "Account Association",
+      hasAccountAssociation,
+      "Configured",
+      "Not set - run: npx create-onchain --manifest",
       true
     );
 

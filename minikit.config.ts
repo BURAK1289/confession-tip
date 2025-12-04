@@ -9,12 +9,8 @@ const ROOT_URL =
  * @see {@link https://docs.base.org/mini-apps/features/manifest}
  */
 export const minikitConfig = {
-  accountAssociation: {
-    // Generate these at https://base.org/build after deployment
-    header: "",
-    payload: "",
-    signature: "",
-  },
+  // accountAssociation will be added after running: npx create-onchain --manifest
+  // This requires connecting your Farcaster custody wallet
   baseBuilder: {
     // Wallet address for Base Builder Rewards program
     ownerAddress: "0xf30Dd3a945a12aaEAE3f355Ba0212d6256e6c8d9",
