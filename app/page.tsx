@@ -74,7 +74,13 @@ function HomeContent() {
 
       <button
         className={styles.fab}
-        onClick={() => setIsCreateModalOpen(true)}
+        onClick={() => {
+          if (!address) {
+            alert('Please connect your wallet first to share a confession');
+            return;
+          }
+          setIsCreateModalOpen(true);
+        }}
         aria-label="Create confession"
       >
         <svg
@@ -95,6 +101,7 @@ function HomeContent() {
       <CreateConfessionModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
+        walletAddress={address}
         onSuccess={() => {
           window.location.reload();
         }}

@@ -11,6 +11,7 @@ export interface CreateConfessionModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess?: (confession: Confession) => void;
+  walletAddress?: string;
 }
 
 const MIN_LENGTH = 10;
@@ -20,6 +21,7 @@ export const CreateConfessionModal: React.FC<CreateConfessionModalProps> = ({
   isOpen,
   onClose,
   onSuccess,
+  walletAddress,
 }) => {
   const [text, setText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -48,6 +50,11 @@ export const CreateConfessionModal: React.FC<CreateConfessionModalProps> = ({
       return;
     }
 
+    if (!walletAddress) {
+      setError('Please connect your wallet first');
+      return;
+    }
+
     setIsSubmitting(true);
     setError(null);
 
@@ -57,7 +64,10 @@ export const CreateConfessionModal: React.FC<CreateConfessionModalProps> = ({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ 
+          text,
+          author_address: walletAddress,
+        }),
       });
 
       const data = await response.json();
@@ -152,6 +162,14 @@ export const CreateConfessionModal: React.FC<CreateConfessionModalProps> = ({
             </div>
           )}
 
+          {/* Wallet warning */}
+          {!walletAddress && (
+            <div className={styles.error}>
+              <span className={styles.errorIcon}>⚠️</span>
+              <span>Wallet address is required</span>
+            </div>
+          )}
+
           {/* Info message */}
           <div className={styles.info}>
             <span className={styles.infoIcon}>ℹ️</span>
@@ -173,7 +191,7 @@ export const CreateConfessionModal: React.FC<CreateConfessionModalProps> = ({
               type="submit"
               variant="primary"
               size="md"
-              disabled={!isValid || isSubmitting}
+              disabled={!isValid || isSubmitting || !walletAddress}
             >
               {isSubmitting ? 'Sharing...' : 'Share Confession'}
             </Button>

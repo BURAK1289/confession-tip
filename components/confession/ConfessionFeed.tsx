@@ -24,12 +24,12 @@ interface FeedResponse {
 
 const fetchConfessions = async (
   category: ConfessionCategory | null | undefined,
-  offset: number,
+  page: number,
   limit: number
 ): Promise<FeedResponse> => {
   const params = new URLSearchParams({
     limit: limit.toString(),
-    offset: offset.toString(),
+    page: page.toString(),
     sort: 'recent',
   });
 
@@ -44,7 +44,12 @@ const fetchConfessions = async (
   }
 
   const data = await response.json();
-  return data;
+  
+  // Add nextOffset for pagination
+  return {
+    ...data,
+    nextOffset: page + 1,
+  };
 };
 
 export const ConfessionFeed: React.FC<ConfessionFeedProps> = ({
@@ -66,11 +71,11 @@ export const ConfessionFeed: React.FC<ConfessionFeedProps> = ({
     refetch,
   } = useInfiniteQuery({
     queryKey: ['confessions', category],
-    queryFn: ({ pageParam = 0 }) => fetchConfessions(category, pageParam, limit),
+    queryFn: ({ pageParam = 1 }) => fetchConfessions(category, pageParam, limit),
     getNextPageParam: (lastPage) => {
       return lastPage.hasMore ? lastPage.nextOffset : undefined;
     },
-    initialPageParam: 0,
+    initialPageParam: 1,
   });
 
   // Infinite scroll observer
