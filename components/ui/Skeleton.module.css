@@ -1,101 +1,75 @@
-/* Base skeleton */
+/* Base skeleton - uses global .skeleton class from globals.css */
 .skeleton {
   background: linear-gradient(
     90deg,
-    #f0f0f0 0%,
-    #e0e0e0 50%,
-    #f0f0f0 100%
+    var(--bg-tertiary) 0%,
+    var(--bg-elevated) 50%,
+    var(--bg-tertiary) 100%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
-  border-radius: 0.25rem;
+  border-radius: var(--radius-sm);
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 /* Variants */
 .text {
-  height: 1rem;
-  margin-bottom: 0.5rem;
+  height: 14px;
+  margin-bottom: 8px;
 }
 
 .circular {
-  border-radius: 50%;
+  border-radius: var(--radius-full);
 }
 
 .rectangular {
-  border-radius: 0.375rem;
+  border-radius: var(--radius-sm);
 }
 
 /* Card Skeleton */
 .cardSkeleton {
-  background: white;
-  border-radius: 0.75rem;
-  padding: 1.25rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  border: 1px solid var(--border-primary);
 }
 
 .cardSkeleton .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.75rem;
+  margin-bottom: 12px;
 }
 
 .cardSkeleton .content {
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 .cardSkeleton .footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 0.75rem;
-  border-top: 1px solid #f1f5f9;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-primary);
 }
 
 .cardSkeleton .stats {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 16px;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .skeleton {
-    background: linear-gradient(
-      90deg,
-      #2d3748 0%,
-      #1a202c 50%,
-      #2d3748 100%
-    );
-    background-size: 200% 100%;
-  }
-
+/* Mobile */
+@media (max-width: 480px) {
   .cardSkeleton {
-    background: #1e293b;
-    border-color: #334155;
-  }
-
-  .cardSkeleton .footer {
-    border-top-color: #334155;
-  }
-}
-
-/* Mobile responsiveness */
-@media (max-width: 640px) {
-  .cardSkeleton {
-    padding: 1rem;
+    padding: 14px;
+    border-radius: var(--radius-md);
   }
 }

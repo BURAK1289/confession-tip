@@ -4,59 +4,49 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3rem 1.5rem;
+  padding: 48px 24px;
   text-align: center;
-  min-height: 300px;
+  min-height: 280px;
 }
 
 .icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  opacity: 0.8;
+  font-size: 56px;
+  margin-bottom: 16px;
+  opacity: 0.7;
 }
 
 .title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #1e293b;
-  margin: 0 0 0.5rem 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.01em;
 }
 
 .description {
-  font-size: 0.9375rem;
-  color: #64748b;
-  margin: 0 0 1.5rem 0;
-  max-width: 400px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 24px 0;
+  max-width: 320px;
   line-height: 1.6;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .title {
-    color: #e2e8f0;
-  }
-
-  .description {
-    color: #94a3b8;
-  }
-}
-
-/* Mobile responsiveness */
-@media (max-width: 640px) {
+/* Mobile */
+@media (max-width: 480px) {
   .container {
-    padding: 2rem 1rem;
-    min-height: 250px;
+    padding: 32px 16px;
+    min-height: 240px;
   }
 
   .icon {
-    font-size: 3rem;
+    font-size: 48px;
   }
 
   .title {
-    font-size: 1.125rem;
+    font-size: 16px;
   }
 
   .description {
-    font-size: 0.875rem;
+    font-size: 13px;
   }
 }
